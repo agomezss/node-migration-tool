@@ -1,0 +1,33 @@
+{
+	"name": "migration-tool",
+	"version": "1.0.0",
+	"description": "Database migrations tool runner",
+	"author": "Alessandro Gomez",
+	"main": "handler.js",
+	"scripts": {
+		"clean": "rimraf .build .serverless",
+		"copy-env": "copyfiles -f .serverless/.env ./",
+		"copy-serverless-environment": "serverless dotenv --stage dev --accountId 999999999999 --isLocalhost yes && copyfiles -f .serverless/.env ./",
+		"tsc": "tsc",
+		"db-migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
+		"db-create-migration": "ts-node ./node_modules/typeorm/cli.js migration:create -n NewMigration"
+	},
+	"dependencies": {
+		"aws-sdk": "^2.519.0",
+		"dotenv": "^8.0.0",
+		"pg": "^7.11.0",
+		"pg-native": "^3.0.0",
+		"typeorm": "^0.2.18"
+	},
+	"devDependencies": {
+		"@jimdo/serverless-dotenv": "^1.0.0",
+		"@types/node": "^10.14.9",
+		"copyfiles": "^2.1.0",
+		"rimraf": "^3.0.0",
+		"serverless-pseudo-parameters": "^2.4.0",
+		"serverless-plugin-ifelse": "^1.0.4",
+		"ts-loader": "^5.4.5",
+		"ts-node": "^8.3.0",
+		"typescript": "^3.5.2"
+	}
+}
